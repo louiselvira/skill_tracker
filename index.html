@@ -7,7 +7,6 @@
 		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
 		<link href="bootstrap.min.css" rel="stylesheet">
-		<link rel="stylesheet" href="ngProgress.css">
 		<link rel="stylesheet" href="style.css">
 		<title>SkillTracker</title>
 	</head>
@@ -25,10 +24,12 @@
 			<h2>My skills:</h2>
 			<ul>
 				<li ng-repeat="skill in mySkills">
-					{{skill.name}}: 
-					Hours logged: {{skill.hoursLogged}}
-					Level: {{skill.level}}
-					<button ng-model="skill.hoursLogged" ng-click="skill.logHour()">Log hour</button>
+					<div class="row">
+						<div class="col-sm-2">{{skill.name}}</div>
+						<div class="col-sm-2">Level: {{skill.level}}</div>
+						<div class="col-sm-6 progressbar"><progressbar max="10000" value="skill.hoursLogged" type="success"><span style="color:white; white-space:nowrap;">{{skill.hoursLogged}} /10 000</span></progressbar></div>
+						<div class="col-sm-2"><input type="number" class="hours-input" ng-model="hours"/><button ng-click="skill.logHour(hours)">Log hours</button></div>
+					</div>
 				</li>
 			</ul>
 
@@ -38,7 +39,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="bootstrap.min.js"></script>
-		<script src="ngProgress.js"></script>
+		<script src="ui-bootstrap-tpls-0.13.4.min.js"></script>
 		<script src="app.js"></script>
 	</body>
 </html>
