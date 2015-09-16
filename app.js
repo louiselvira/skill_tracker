@@ -1,6 +1,6 @@
 var skillTracker = angular.module("skillTracker", ['ui.bootstrap']);
 
-skillTracker.controller('mainController', function ($scope, $modal) {
+skillTracker.controller('mainController', function ($scope, $window, $modal) {
 	
 	//Container array for skills:
 	var mySkills = []; 
@@ -13,8 +13,12 @@ skillTracker.controller('mainController', function ($scope, $modal) {
     	this.level = "";
 		this.logHour = function (hours) { //Function to log hours to skill
 			this.hoursLogged = this.hoursLogged + hours;
-			this.progressbar = this.progressbar + hours;
-			//Level checkers:
+			var currentLevel = this.level;
+			this.setLevel();
+			this.checkForLevelUp(currentLevel);
+		};
+		
+		this.setLevel = function () {
 			if (this.hoursLogged >= 3600) {
 				this.level = "God Mode";
 			}
@@ -35,15 +39,17 @@ skillTracker.controller('mainController', function ($scope, $modal) {
 			}
 			else if (this.hoursLogged > 100) {
 				this.level = "Student";
-				this.levelUp();
 			}
 			else if (this.hoursLogged > 1) {
 				this.level = "Beginner";
 			}
 		};
-		this.levelUp = function () {
-			var levelUpMessage = "Way to go! You've reached the level of " + this.level + ". Keep on leveling up.";
-			$scope.openModal(levelUpMessage);
+		
+		this.checkForLevelUp = function (currentLevel) {
+			if (this.level != currentLevel) {
+				var levelUpMessage = "Way to go! You've reached the level of " + this.level + ". Keep on leveling up.";
+				$window.alert(levelUpMessage);
+			}
 		};
 	}
 
@@ -58,6 +64,7 @@ skillTracker.controller('mainController', function ($scope, $modal) {
 		$scope.skillName = "";
 	};
 	
+	/*
 	$scope.openModal = function (levelUpMessage) {
 		var modalInstance = $modal.open({
 			size: "sm",
@@ -66,5 +73,5 @@ skillTracker.controller('mainController', function ($scope, $modal) {
 			animation: true
     	});
 	};
-	
+	*/
 });
