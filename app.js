@@ -1,14 +1,4 @@
-// Skilltracker
-// Louise Stigell
-
-//The user can: 
-//- Add and remove skills they'd like to start tracking
-//- Log hours to that skill
-//- See a progress bar that indicates how close they are to 10 000 hours ("mastery").
-//- Reach different "levels" throughout their skill tracking.
-//- Get a weekly overview of their skill progress
-
-var skillTracker = angular.module("skillTracker", ['ui.bootstrap']); //"Hello, I'm an Angular app."
+var skillTracker = angular.module("skillTracker", ['ui.bootstrap']);
 
 skillTracker.controller('mainController', function ($scope, $modal) {
 	
