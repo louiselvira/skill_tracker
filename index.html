@@ -6,29 +6,32 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+		<link href='https://fonts.googleapis.com/css?family=Fredoka+One' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/style.css">
 		<title>SkillTracker</title>
 	</head>
 	<body ng-controller="mainController">
-		<h1>SkillTracker beta</h1>
+		
+		<div id="alert-placeholder"></div>
+		
+		<h1 class="title">SkillTracker <span class="info glyphicon glyphicon-question-sign" aria-hidden="true" popover-placement="right" popover="SkillTracker is an app that lets you keep track of how many hours you have spent on a skill. By tracking hours, you'll level up and eventually become a master!"></span></h1>
 
-		<div> 
-			<h3><span>New skill to start tracking: </span><span ng-bind="skillName">{{skill}}</span></h3>
-			<input type="text" ng-model="skillName"/>
-			<button ng-click="save(skillName)">Save new skill</button>
-
-		</div>
+		<form class="form-inline" id="add-skill">
+			<h3>Add new skill: </h3>
+			<input key-bind="enter:'go()'" type="text" class="form-control" ng-model="skillName"/>
+			<button class="btn btn-success" ng-click="save(skillName)">Save</button>
+		</form>
 
 		<div>
 			<h2>My skills:</h2>
 			<ul>
 				<li ng-repeat="skill in mySkills">
-					<div class="skill row">
-						<div class="col-sm-2">{{skill.name}}</div>
-						<div class="col-sm-2">Level: {{skill.level}}</div>
-						<div class="col-sm-6 progressbar"><progressbar max="3600" value="skill.hoursLogged" type="success"><span style="color:white; white-space:nowrap;">{{skill.hoursLogged}}</span></progressbar></div>
-						<div class="col-sm-2"><input type="number" class="hours-input" ng-model="hours"/><button ng-click="skill.logHour(hours)">Log hours</button></div>
+					<div class="skill row form-inline">
+						<div class="col-sm-2 skill-text"><span class="delete glyphicon glyphicon-remove" ng-click="delete(skill)"></span>{{skill.name}}</div>
+						<div class="col-sm-2 skill-text">Level: <p>{{skill.level}}</p></div>
+						<div class="col-sm-5"><progressbar class="progressbar" max="3600" value="skill.hoursLogged" type="success"><span style="color:white; white-space:nowrap;">{{skill.hoursLogged}}</span></progressbar></div>
+						<div class="col-sm-3"><input type="number" class="form-control" ng-model="hours"/><button class="btn btn-success" ng-click="skill.logHour(hours)">Log hours</button></div>
 					</div>
 				</li>
 			</ul>

@@ -1,6 +1,6 @@
 var skillTracker = angular.module("skillTracker", ['ui.bootstrap']);
 
-skillTracker.controller('mainController', function ($scope, $window, $modal) {
+skillTracker.controller('mainController', function ($scope, $position) {
 	
 	//Container array for skills:
 	var mySkills = []; 
@@ -47,8 +47,11 @@ skillTracker.controller('mainController', function ($scope, $window, $modal) {
 		
 		this.checkForLevelUp = function (currentLevel) {
 			if (this.level != currentLevel) {
-				var levelUpMessage = "Way to go! You've reached the level of " + this.level + ". Keep on leveling up.";
-				$window.alert(levelUpMessage);
+				var levelUpMessage = "Way to go! You've reached the level of " + this.level + ". Keep on doing your thing.";
+				$('#alert-placeholder').html("<div class='alert alert-success alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><strong>Level up! </strong>" + levelUpMessage + "</div>");
+				setTimeout(function() {
+					$(".alert").remove();
+				}, 5000);
 			}
 		};
 	}
@@ -64,14 +67,8 @@ skillTracker.controller('mainController', function ($scope, $window, $modal) {
 		$scope.skillName = "";
 	};
 	
-	/*
-	$scope.openModal = function (levelUpMessage) {
-		var modalInstance = $modal.open({
-			size: "sm",
-      		template: "<div ng-show='showModal' <div class='modal-header'><h3 class='modal-title'>Level up!</h3></div><div class='modal-body'><p>" + levelUpMessage + "</p></div><div class='modal-footer'><button class='btn btn-primary' type='button' ng-click='showModal = false'>Yaaay!</button></div></div>",
-			controller: "mainController",
-			animation: true
-    	});
+	$scope.delete = function (skill) {
+		mySkills.pop(skill);
 	};
-	*/
+	
 });
