@@ -47,7 +47,7 @@ skillTracker.controller('mainController', function ($scope, $position) {
 		
 		this.checkForLevelUp = function (currentLevel) {
 			if (this.level != currentLevel) {
-				var levelUpMessage = "Way to go! You've reached the level of " + this.level + ". Keep on doing your thing.";
+				var levelUpMessage = "You've reached the level of " + this.level + ". Keep on doing your thing.";
 				$('#alert-placeholder').html("<div class='alert alert-success alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><strong>Level up! </strong>" + levelUpMessage + "</div>");
 				setTimeout(function() {
 					$(".alert").remove();
